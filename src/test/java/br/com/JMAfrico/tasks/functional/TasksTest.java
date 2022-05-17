@@ -1,5 +1,7 @@
 package br.com.JMAfrico.tasks.functional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import org.junit.Assert;
@@ -7,6 +9,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TasksTest {
@@ -19,6 +23,14 @@ public class TasksTest {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		return driver;
 	}
+	
+//	public WebDriver acessarAplicacaoComSeleniumGrid() throws MalformedURLException {
+//		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//		WebDriver driver = new RemoteWebDriver(new URL("http://172.28.16.1:4444/wd/hub"),capabilities);
+//		driver.navigate().to("http://localhost:8001/tasks");
+//		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//		return driver;
+//	}
 	
 	@Test
 	public void testAmbiente() {
@@ -47,6 +59,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveIncluirNovaTarefaDataPassada() {
 		WebDriver driver = acessarAplicacao();
+		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='task']")).sendKeys("Teste data invalida");
 		driver.findElement(By.xpath("//input[@id='dueDate']")).sendKeys("04/04/2022");
@@ -59,6 +72,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveIncluirNovaTarefaSemDescricao() {
 		WebDriver driver = acessarAplicacao();
+		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='dueDate']")).sendKeys("20/08/2022");
 		driver.findElement(By.xpath("//input[@id='saveButton']")).click();
@@ -70,6 +84,7 @@ public class TasksTest {
 	@Test
 	public void naoDeveIncluirNovaTarefaSemData() {
 		WebDriver driver = acessarAplicacao();
+		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='task']")).sendKeys("Teste sem data");
 		driver.findElement(By.xpath("//input[@id='saveButton']")).click();
