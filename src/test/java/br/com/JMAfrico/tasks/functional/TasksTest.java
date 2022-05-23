@@ -19,21 +19,21 @@ public class TasksTest {
 
 	//WebDriverWait wait;
 	
-	public WebDriver acessarAplicacao() {
-		WebDriver driver = new ChromeDriver();
-		driver.navigate().to("http://localhost:8080/tasks-frontend");
-		//wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		return driver;
-	}
-	
-//	public WebDriver acessarAplicacaoComSeleniumGridDockerizado() throws MalformedURLException {
-//		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-//		WebDriver driver = new RemoteWebDriver(new URL("http://172.28.16.1:4444/wd/hub"),capabilities);
-//		driver.navigate().to("http://192.168.1.5:8001/tasks");//ip minha maquina(ipconfig-Adaptador ethernet WSL ou wifi)
+//	public WebDriver acessarAplicacao() {
+//		WebDriver driver = new ChromeDriver();
+//		driver.navigate().to("http://localhost:8080/tasks-frontend");
+//		//wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 //		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 //		return driver;
 //	}
+	
+	public WebDriver acessarAplicacaoComSeleniumGridDockerizado() throws MalformedURLException {
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		WebDriver driver = new RemoteWebDriver(new URL("http://172.28.16.1:4444/wd/hub"),capabilities);
+		driver.navigate().to("http://192.168.1.5:8080/tasks-frontend");//ip minha maquina(ipconfig-Adaptador ethernet WSL ou wifi)
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		return driver;
+	}
 	
 //	@Test
 //	public void testAmbiente() {
@@ -45,8 +45,8 @@ public class TasksTest {
 //	}
 	
 	@Test
-	public void deveIncluirNovaTarefa() {
-		WebDriver driver = acessarAplicacao();
+	public void deveIncluirNovaTarefa() throws MalformedURLException {
+		WebDriver driver = acessarAplicacaoComSeleniumGridDockerizado();
 		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='task']")).sendKeys("Teste atualizado 2");
@@ -60,8 +60,8 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveIncluirNovaTarefaDataPassada() {
-		WebDriver driver = acessarAplicacao();
+	public void naoDeveIncluirNovaTarefaDataPassada() throws MalformedURLException {
+		WebDriver driver = acessarAplicacaoComSeleniumGridDockerizado();
 		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='task']")).sendKeys("Teste data invalida");
@@ -73,8 +73,8 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveIncluirNovaTarefaSemDescricao(){
-		WebDriver driver = acessarAplicacao();
+	public void naoDeveIncluirNovaTarefaSemDescricao() throws MalformedURLException{
+		WebDriver driver = acessarAplicacaoComSeleniumGridDockerizado();
 		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='dueDate']")).sendKeys("20/08/2022");
@@ -85,8 +85,8 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void naoDeveIncluirNovaTarefaSemData() {
-		WebDriver driver = acessarAplicacao();
+	public void naoDeveIncluirNovaTarefaSemData() throws MalformedURLException {
+		WebDriver driver = acessarAplicacaoComSeleniumGridDockerizado();
 		
 		driver.findElement(By.xpath("//a[@id='addTodo']")).click();
 		driver.findElement(By.xpath("//input[@id='task']")).sendKeys("Teste sem data");
