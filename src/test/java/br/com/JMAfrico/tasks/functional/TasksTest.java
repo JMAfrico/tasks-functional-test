@@ -21,7 +21,7 @@ public class TasksTest {
 	
 	public WebDriver acessarAplicacao() {
 		WebDriver driver = new ChromeDriver();
-		driver.navigate().to("http://localhost:8080/tasks");
+		driver.navigate().to("http://localhost:8080/tasks-frontend");
 		//wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		return driver;
