@@ -29,8 +29,8 @@ public class TasksTest {
 	
 	public WebDriver acessarAplicacaoComSeleniumGridDockerizado() throws MalformedURLException {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.176.1:4444/wd/hub"),capabilities);
-		driver.navigate().to("http://192.168.176.1:8080/tasks-frontend");//ip minha maquina(ipconfig-Adaptador ethernet WSL ou wifi)
+		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.1.3:4444/wd/hub"),capabilities);
+		driver.navigate().to("http://192.168.1.3:8080/tasks-frontend");//ip minha maquina(ipconfig-Adaptador ethernet WSL ou wifi)
 		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		return driver;
 	}
